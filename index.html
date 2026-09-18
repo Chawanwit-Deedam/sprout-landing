@@ -43,11 +43,12 @@
         </svg>
         <span>Sprout</span>
       </a>
-      <nav class="nav__links" aria-label="เมนูหลัก">
+      <nav class="nav__links" id="navmenu" aria-label="เมนูหลัก">
         <a href="#how" data-i18n="nav_how">วิธีทำงาน</a>
         <a href="#features" data-i18n="nav_features">ฟีเจอร์</a>
         <a href="#pricing" data-i18n="nav_pricing">ราคา</a>
         <a href="#faq" data-i18n="nav_faq">คำถามที่พบบ่อย</a>
+        <a class="nav__menu-cta btn btn--sm" href="#buy" data-i18n="nav_cta">เริ่มใช้ฟรี</a>
       </nav>
       <div class="nav__actions">
         <button class="icon-btn" type="button" data-theme-toggle aria-label="สลับโหมดสว่าง/มืด" data-i18n-aria="aria_theme">
@@ -64,7 +65,10 @@
           <span data-lang-label>EN</span>
         </button>
         <a class="link-quiet" href="#buy" data-i18n="nav_login">เข้าสู่ระบบ</a>
-        <a class="btn btn--sm" href="#buy" data-i18n="nav_cta">เริ่มใช้ฟรี</a>
+        <a class="btn btn--sm nav__cta-desktop" href="#buy" data-i18n="nav_cta">เริ่มใช้ฟรี</a>
+        <button class="nav__toggle" type="button" data-nav-toggle aria-controls="navmenu" aria-expanded="false" aria-label="เปิด/ปิดเมนู" data-i18n-aria="aria_menu">
+          <span class="nav__toggle-bar"></span><span class="nav__toggle-bar"></span><span class="nav__toggle-bar"></span>
+        </button>
       </div>
     </div>
   </header>

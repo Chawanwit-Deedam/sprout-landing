@@ -141,11 +141,25 @@
     });
   }
 
+  /* ---------- Mobile navigation (hamburger) ---------- */
+  const navToggle = document.querySelector("[data-nav-toggle]");
+  const navMenu = document.getElementById("navmenu");
+  if (navToggle && navMenu) {
+    const setMenu = (open) => {
+      navMenu.classList.toggle("is-open", open);
+      navToggle.setAttribute("aria-expanded", String(open));
+    };
+    navToggle.addEventListener("click", () => setMenu(navMenu.classList.contains("is-open") ? false : true));
+    // Close after tapping a link, or on Escape.
+    navMenu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+  }
+
   /* ---------- Language switch (TH / EN) ---------- */
   const EN = {
     doc_title: "Sprout — Save automatically, let your money grow",
     skip: "Skip to main content",
-    aria_theme: "Toggle light / dark mode", aria_lang: "Switch language",
+    aria_theme: "Toggle light / dark mode", aria_lang: "Switch language", aria_menu: "Open / close menu",
     nav_how: "How it works", nav_features: "Features", nav_pricing: "Pricing", nav_faq: "FAQ",
     nav_login: "Log in", nav_cta: "Get started free",
     hero_pill: "New · AI-powered auto-saving",
