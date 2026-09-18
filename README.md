@@ -64,40 +64,18 @@ npx serve .
 
 **เร็วสุด (แบบ manual):** เปิด https://app.netlify.com/drop แล้วลากโฟลเดอร์ `fastwork` ไปวาง ได้ลิงก์ HTTPS ใน ~10 วินาที
 
-## 🔁 CI/CD (GitHub Actions → Netlify)
+## 🔁 CI/CD
 
-Pipeline อยู่ที่ [.github/workflows/deploy.yml](.github/workflows/deploy.yml):
-- **push เข้า `main`** → job `validate` (HTMLHint) → job `deploy` (production)
-- **เปิด Pull Request** → deploy **preview** พร้อมคอมเมนต์ลิงก์พรีวิวใน PR อัตโนมัติ
+- **CI — GitHub Actions** ([.github/workflows/ci.yml](.github/workflows/ci.yml)): ทุก push/PR รัน **HTMLHint** เป็น quality gate
+- **CD — Netlify (เชื่อม GitHub ตรง ๆ)**: push เข้า `main` → deploy **production**, เปิด PR → **deploy preview** อัตโนมัติ — **ไม่ต้องเก็บ token/secret** (ปลอดภัยกว่า)
 
-### ขั้นตอนตั้งค่าครั้งเดียว
+### เชื่อม Netlify กับ GitHub (ตั้งครั้งเดียว)
+1. [app.netlify.com](https://app.netlify.com) → **Add new project → Import an existing project → GitHub**
+2. อนุญาตสิทธิ์ (เลือกให้เห็นเฉพาะ repo `sprout-landing` ก็ได้ — least privilege)
+3. Build settings: **Build command** เว้นว่าง · **Publish directory** = `.` (มีใน `netlify.toml` อยู่แล้ว)
+4. กด **Deploy** — เสร็จ! จากนั้น push เข้า `main` = deploy อัตโนมัติ, เปิด PR = ได้ลิงก์พรีวิว
 
-**1) ขึ้นโค้ดไป GitHub**
-```bash
-git init
-git add .
-git commit -m "Sprout landing page + CI/CD pipeline"
-git branch -M main
-git remote add origin https://github.com/<username>/sprout-landing.git
-git push -u origin main
-```
-(สร้าง repo เปล่าก่อนที่ https://github.com/new — จะ public หรือ private ก็ได้)
-
-**2) สร้าง Netlify site + เอา ID/Token**
-- ที่ [netlify.com](https://app.netlify.com) → **Add new site → Deploy manually** (สร้าง site เปล่า ๆ ไว้ก่อน ไม่ต้องอัปไฟล์ก็ได้)
-- **Site ID**: Site configuration → General → *Site ID* (API ID)
-- **Token**: มุมขวาบน avatar → User settings → **Applications → Personal access tokens → New access token**
-
-**3) ใส่ Secrets ใน GitHub repo**
-Repo → **Settings → Secrets and variables → Actions → New repository secret** เพิ่ม 2 ตัว:
-| ชื่อ | ค่า |
-|---|---|
-| `NETLIFY_AUTH_TOKEN` | personal access token จากข้อ 2 |
-| `NETLIFY_SITE_ID` | Site ID จากข้อ 2 |
-
-**4) เสร็จ!** ทุกครั้งที่ `git push` เข้า `main` → Actions จะ lint แล้ว deploy ขึ้น production ให้อัตโนมัติ · เปิด PR เมื่อไหร่ก็ได้ลิงก์พรีวิวทันที
-
-> หมายเหตุความปลอดภัย: token/secret อยู่ใน GitHub Secrets (เข้ารหัส ไม่โผล่ใน log) — อย่า commit token ลงในโค้ดเด็ดขาด
+> ทำไมไม่ deploy ผ่าน GitHub Actions? เพราะแบบนั้นต้องเก็บ Netlify token เป็น secret ใน GitHub — การให้ Netlify เชื่อม GitHub ตรง ๆ ปลอดภัยกว่า (ไม่มี long-lived token) และได้ PR preview ในตัว ส่วน Actions ทำหน้าที่ CI ตรวจคุณภาพโค้ดก่อน merge
 
 ## 🔧 ปรับแต่ง
 
