@@ -1,0 +1,58 @@
+name: CI/CD — Deploy to Netlify
+
+# Pipeline:
+#   1) validate  — lint/validate the HTML (quality gate)
+#   2) deploy    — on push to main  -> production deploy
+#                  on pull request  -> deploy preview (URL commented on the PR)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Least-privilege token; PR comments need pull-requests: write.
+permissions:
+  contents: read
+  pull-requests: write
+
+# Don't run overlapping deploys for the same ref.
+concurrency:
+  group: netlify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Lint & validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: HTMLHint
+        run: npx --yes htmlhint@1 "index.html"
+
+  deploy:
+    name: Deploy to Netlify
+    needs: validate
+    runs-on: ubuntu-latest
+    # Skip on forked PRs, where deploy secrets aren't available.
+    if: ${{ github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: '.'
+          production-branch: main
+          production-deploy: ${{ github.event_name == 'push' }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy ${{ github.sha }} from GitHub Actions"
+          enable-pull-request-comment: true
+          enable-commit-comment: false
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 5

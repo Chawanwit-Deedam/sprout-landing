@@ -1,0 +1,111 @@
+# Sprout — Landing Page
+
+Landing page สินค้าสมมติ **Sprout** (แอปการเงิน/ออมเงินอัตโนมัติ)
+ออกแบบตามหลัก **UX/UI + จิตวิทยาการโน้มน้าว** เพื่อการแปลงเป็นลูกค้า (conversion)
+เขียนด้วย **HTML + CSS + JavaScript ล้วน ไม่มี dependency ภายนอก** ไม่ต้อง build
+
+![type](https://img.shields.io/badge/stack-vanilla-10b981) ![deps](https://img.shields.io/badge/dependencies-0-34d399)
+
+## 🧠 หลักจิตวิทยา / UX ที่ใส่ไว้
+
+| หลักการ | อยู่ตรงไหน |
+|---|---|
+| Value เป็นประโยชน์ (ไม่ใช่ฟีเจอร์) + ลด friction | Hero: "ออมเงินอัตโนมัติ" + "เริ่มฟรี ไม่ต้องผูกบัตร" |
+| Social proof | เรตติ้ง/จำนวนผู้ใช้ใน hero, แถบมาตรฐาน, ตัวเลขสถิติ, รีวิว |
+| Authority / trust | แถบ PDPA · ISO 27001 · SSL, หัวข้อความปลอดภัย |
+| Problem → Agitate → Solve | ส่วน "เก็บเงินไม่เคยอยู่" ก่อนเสนอทางแก้ |
+| ลดความรู้สึกยุ่งยาก | "เริ่มออมได้ใน 3 นาที" (3 ขั้น) |
+| Pricing anchoring + decoy | 3 แพ็กเกจ, ตัวกลาง "แนะนำ" เด่น |
+| Risk reversal | การันตีคืนเงิน 30 วัน · ยกเลิกได้ทุกเมื่อ |
+| Objection handling | FAQ ตอบข้อกังวลเรื่องความปลอดภัย/ค่าธรรมเนียม/ยกเลิก |
+| CTA ซ้ำย้ำ | ปุ่ม "เริ่มใช้ฟรี" ตั้งแต่ nav → hero → showcase → pricing → ปิดท้าย |
+
+## ✨ ฟีเจอร์เชิงเทคนิค
+
+- **โหมดสว่าง/มืด (Light/Dark)** — สลับได้เอง เคารพ system preference ตอนแรก จำค่าไว้ใน localStorage และตั้งก่อน paint (`theme-init.js`) เพื่อกัน flash
+- **สลับภาษา TH/EN** — คำแปลเก็บเป็น dictionary ใน JS สลับด้วย `textContent` (ไม่ใช้ innerHTML) จำภาษาไว้ใน localStorage
+- **Reveal-on-scroll** (`IntersectionObserver`), **count-up** ตัวเลข (รองรับทศนิยม เช่น 4.9)
+- **กราฟแดชบอร์ดโตเมื่อเลื่อนถึง**, เส้นกราฟ hero วาดเอง (SVG stroke animation)
+- **สลับราคา รายเดือน/รายปี** และ **FAQ accordion** (เปิดทีละอัน)
+- ตัวการ์ด UI ของแอป + ไอคอนทั้งหมดสร้างจาก **CSS/SVG** — ไม่มีไฟล์รูป โหลดไว
+- ทันสมัย: ธีมสว่างสะอาด สลับ section มืดเพื่อความพรีเมียม (fintech look)
+- **เข้าถึงง่าย + ปลอดภัย**: semantic HTML, `prefers-reduced-motion`, skip link, โฟกัสชัด,
+  **Content Security Policy** เข้ม, ไม่มี `innerHTML`/`eval` (ไม่มีช่องทาง XSS)
+
+## 📁 โครงสร้าง
+
+```
+fastwork/
+├─ index.html     # โครงหน้า + เนื้อหา (semantic) + data-i18n
+├─ styles.css     # ดีไซน์ + ธีมสว่าง/มืด + คอมโพเนนต์ + responsive
+├─ theme-init.js  # เซ็ตธีม/ภาษาก่อน paint (กัน flash) — โหลดใน <head>
+├─ script.js      # reveal, count-up, chart, pricing toggle, FAQ, theme, i18n
+├─ favicon.svg    # โลโก้
+├─ _headers       # security headers ตอน deploy (Netlify/Cloudflare)
+└─ README.md
+```
+
+## ▶️ รันในเครื่อง
+
+```bash
+python -m http.server 5173      # แล้วเปิด http://localhost:5173
+# หรือ
+npx serve .
+```
+
+## 🚀 Deploy ฟรี (แนะนำ)
+
+| บริการ | วิธีเร็วสุด |
+|---|---|
+| **Netlify** | ลากโฟลเดอร์ทั้งอันไปวางที่ https://app.netlify.com/drop (อ่าน `_headers` ให้อัตโนมัติ) |
+| **Cloudflare Pages** | เชื่อม GitHub หรืออัปโหลดโฟลเดอร์ — เครือข่ายเร็ว โดเมนฟรี |
+| **Vercel** | `npx vercel` ในโฟลเดอร์ |
+| **GitHub Pages** | push ขึ้น repo → Settings → Pages → เลือก branch |
+
+**เร็วสุด (แบบ manual):** เปิด https://app.netlify.com/drop แล้วลากโฟลเดอร์ `fastwork` ไปวาง ได้ลิงก์ HTTPS ใน ~10 วินาที
+
+## 🔁 CI/CD (GitHub Actions → Netlify)
+
+Pipeline อยู่ที่ [.github/workflows/deploy.yml](.github/workflows/deploy.yml):
+- **push เข้า `main`** → job `validate` (HTMLHint) → job `deploy` (production)
+- **เปิด Pull Request** → deploy **preview** พร้อมคอมเมนต์ลิงก์พรีวิวใน PR อัตโนมัติ
+
+### ขั้นตอนตั้งค่าครั้งเดียว
+
+**1) ขึ้นโค้ดไป GitHub**
+```bash
+git init
+git add .
+git commit -m "Sprout landing page + CI/CD pipeline"
+git branch -M main
+git remote add origin https://github.com/<username>/sprout-landing.git
+git push -u origin main
+```
+(สร้าง repo เปล่าก่อนที่ https://github.com/new — จะ public หรือ private ก็ได้)
+
+**2) สร้าง Netlify site + เอา ID/Token**
+- ที่ [netlify.com](https://app.netlify.com) → **Add new site → Deploy manually** (สร้าง site เปล่า ๆ ไว้ก่อน ไม่ต้องอัปไฟล์ก็ได้)
+- **Site ID**: Site configuration → General → *Site ID* (API ID)
+- **Token**: มุมขวาบน avatar → User settings → **Applications → Personal access tokens → New access token**
+
+**3) ใส่ Secrets ใน GitHub repo**
+Repo → **Settings → Secrets and variables → Actions → New repository secret** เพิ่ม 2 ตัว:
+| ชื่อ | ค่า |
+|---|---|
+| `NETLIFY_AUTH_TOKEN` | personal access token จากข้อ 2 |
+| `NETLIFY_SITE_ID` | Site ID จากข้อ 2 |
+
+**4) เสร็จ!** ทุกครั้งที่ `git push` เข้า `main` → Actions จะ lint แล้ว deploy ขึ้น production ให้อัตโนมัติ · เปิด PR เมื่อไหร่ก็ได้ลิงก์พรีวิวทันที
+
+> หมายเหตุความปลอดภัย: token/secret อยู่ใน GitHub Secrets (เข้ารหัส ไม่โผล่ใน log) — อย่า commit token ลงในโค้ดเด็ดขาด
+
+## 🔧 ปรับแต่ง
+
+- **ธีม/สี**: ตัวแปรใน `:root` ของ `styles.css` (`--brand`, `--ink`, ฯลฯ)
+- **ฟอนต์**: ปัจจุบันใช้ **Prompt** (หัวข้อ) + **IBM Plex Sans Thai** (เนื้อหา) — รองรับไทย/อังกฤษในตัว เปลี่ยนได้ที่ลิงก์ Google Fonts ใน `index.html` และตัวแปร `--font-head` / `--font` ใน `styles.css`
+- **ราคา**: แก้ `data-monthly` / `data-yearly` บน `.amount` ใน `index.html`
+- **เนื้อหา**: แก้ใน `index.html` ได้ตรง ๆ
+
+---
+
+> งานสาธิตเพื่อการนำเสนอผลงาน — ชื่อแบรนด์ ราคา และข้อมูลเป็นตัวอย่างสมมติ

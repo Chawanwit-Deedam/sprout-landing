@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self';
+                 style-src 'self' https://fonts.googleapis.com;
+                 font-src https://fonts.gstatic.com;
+                 img-src 'self' data:;
+                 base-uri 'self';
+                 form-action 'self';
+                 object-src 'none'" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#07160f" />
+
+  <title>Sprout — ออมเงินอัตโนมัติ ให้เงินโตเอง</title>
+  <meta name="description" content="Sprout แอปการเงินที่ช่วยกันเงินเก็บให้อัตโนมัติทุกครั้งที่คุณใช้จ่าย ตั้งเป้าหมายการออม ปลอดภัยระดับธนาคาร เริ่มฟรี ไม่ต้องผูกบัตร" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Prompt:wght@500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Runs before <body> paints to set theme/lang with no flash (external file → CSP-safe) -->
+  <script src="theme-init.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">ข้ามไปยังเนื้อหาหลัก</a>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="brand" href="#top" aria-label="Sprout">
+        <svg class="brand__mark" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 21c0-5-3-7-7-7 0 5 3 7 7 7Z" fill="#34d399"/>
+          <path d="M12 21c0-6 3.5-8.5 8-8.5 0 6-3.5 8.5-8 8.5Z" fill="#10b981"/>
+          <path d="M12 21v-8" stroke="#065f46" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span>Sprout</span>
+      </a>
+      <nav class="nav__links" aria-label="เมนูหลัก">
+        <a href="#how" data-i18n="nav_how">วิธีทำงาน</a>
+        <a href="#features" data-i18n="nav_features">ฟีเจอร์</a>
+        <a href="#pricing" data-i18n="nav_pricing">ราคา</a>
+        <a href="#faq" data-i18n="nav_faq">คำถามที่พบบ่อย</a>
+      </nav>
+      <div class="nav__actions">
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="สลับโหมดสว่าง/มืด" data-i18n-aria="aria_theme">
+          <svg class="ic-sun" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"
+                  stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <svg class="ic-moon" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="icon-btn lang-btn" type="button" data-lang-toggle aria-label="เปลี่ยนภาษา" data-i18n-aria="aria_lang">
+          <span data-lang-label>EN</span>
+        </button>
+        <a class="link-quiet" href="#buy" data-i18n="nav_login">เข้าสู่ระบบ</a>
+        <a class="btn btn--sm" href="#buy" data-i18n="nav_cta">เริ่มใช้ฟรี</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero section--ink" id="top">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="hero__grid">
+        <div class="hero__copy reveal">
+          <span class="pill"><span class="pill__dot" aria-hidden="true"></span> <span data-i18n="hero_pill">ใหม่ · ออมอัตโนมัติด้วย AI</span></span>
+          <h1 class="hero__title">
+            <span data-i18n="hero_t1">ออมเงินอัตโนมัติ</span><br />
+            <span data-i18n="hero_t2">ดูเงิน</span><span class="grad" data-i18n="hero_t3">งอก</span><span data-i18n="hero_t4">ทุกวัน</span>
+          </h1>
+          <p class="hero__sub" data-i18n="hero_sub">
+            Sprout กันเงินเก็บให้คุณอัตโนมัติทุกครั้งที่ใช้จ่าย ตั้งเป้าหมายครั้งเดียว
+            แล้วปล่อยให้ระบบทำงานแทน — ออมโดยไม่รู้สึกว่าต้องอด
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--lg" href="#buy" data-i18n="hero_cta1">เริ่มใช้ฟรี</a>
+            <a class="btn btn--ghost btn--lg" href="#how">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7L8 5Z" fill="currentColor"/></svg>
+              <span data-i18n="hero_cta2">ดูวิธีทำงาน</span>
+            </a>
+          </div>
+          <p class="hero__micro" data-i18n="hero_micro">✓ เริ่มฟรี ไม่ต้องผูกบัตร  ·  ✓ ยกเลิกเมื่อไหร่ก็ได้</p>
+          <div class="hero__proof">
+            <div class="avatars" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+            <div>
+              <div class="stars" aria-hidden="true">★★★★★</div>
+              <p><strong>4.9</strong>/5 · <span data-i18n="proof_mid">จากผู้ใช้กว่า</span> <strong>120,000</strong> <span data-i18n="proof_unit">คน</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal" aria-hidden="true">
+          <div class="ui-stack" data-float>
+            <div class="ui-card ui-card--balance">
+              <span class="ui-label" data-i18n="ui_label">ยอดออมทั้งหมด</span>
+              <span class="ui-balance">฿ 128,540</span>
+              <span class="ui-delta" data-i18n="ui_delta">▲ 12.4% เดือนนี้</span>
+              <svg class="spark" viewBox="0 0 220 70" preserveAspectRatio="none">
+                <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="rgba(16,185,129,.35)"/><stop offset="1" stop-color="rgba(16,185,129,0)"/>
+                </linearGradient></defs>
+                <path class="spark__area" d="M0,55 L30,48 L60,52 L90,36 L120,40 L150,24 L180,28 L220,10 L220,70 L0,70 Z" fill="url(#sg)"/>
+                <path class="spark__line" d="M0,55 L30,48 L60,52 L90,36 L120,40 L150,24 L180,28 L220,10"
+                      fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="ui-card ui-card--goal">
+              <div class="ui-goal__head"><span data-i18n="ui_goal">เป้าหมาย: เที่ยวญี่ปุ่น</span><strong>72%</strong></div>
+              <div class="ui-progress"><span data-w="72"></span></div>
+              <span class="ui-goal__sub">฿36,000 / ฿50,000</span>
+            </div>
+            <div class="ui-toast">
+              <span class="ui-toast__ic" aria-hidden="true">✓</span>
+              <span><span data-i18n="toast_a">ออมอัตโนมัติ</span> <strong>+฿48</strong> <span data-i18n="toast_b">จากค่ากาแฟ</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust -->
+    <section class="trust">
+      <p class="trust__label reveal" data-i18n="trust_label">ได้รับความไว้วางใจ และปลอดภัยตามมาตรฐาน</p>
+      <div class="trust__logos reveal" aria-label="มาตรฐานความปลอดภัย">
+        <span>PDPA</span><span>ISO&nbsp;27001</span><span>256-bit&nbsp;SSL</span><span>PCI&nbsp;DSS</span><span>2FA</span>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="problem">
+      <header class="section-head reveal">
+        <span class="eyebrow" data-i18n="problem_eyebrow">ฟังดูคุ้น ๆ ไหม?</span>
+        <h2 class="pre" data-i18n="problem_h2">เก็บเงินไม่เคยอยู่ ไม่ใช่เพราะคุณ
+แต่เพราะวิธีเดิมมันฝืน</h2>
+      </header>
+      <div class="problem__grid">
+        <article class="pain reveal"><span class="pain__emoji" aria-hidden="true">😮‍💨</span><h3 data-i18n="pain1_h">ตั้งใจออม แต่ลืมทุกที</h3><p data-i18n="pain1_p">สิ้นเดือนทีก็เหลือไม่พอโอนเข้าบัญชีออม สุดท้ายก็ผัดไปเรื่อย ๆ</p></article>
+        <article class="pain reveal"><span class="pain__emoji" aria-hidden="true">🌀</span><h3 data-i18n="pain2_h">ไม่รู้เงินหายไปไหน</h3><p data-i18n="pain2_p">ค่ากาแฟ ค่าส่งอาหาร ทีละนิด รวมกันเป็นหลักพันโดยไม่รู้ตัว</p></article>
+        <article class="pain reveal"><span class="pain__emoji" aria-hidden="true">🎯</span><h3 data-i18n="pain3_h">ออมแบบไม่มีเป้า</h3><p data-i18n="pain3_p">ไม่เห็นภาพว่าออมไปเพื่ออะไร เลยไม่มีแรงจูงใจให้ทำต่อ</p></article>
+      </div>
+      <p class="problem__turn reveal">
+        <span data-i18n="turn_a">Sprout เปลี่ยนการออมให้เป็น</span>
+        <strong data-i18n="turn_b">เรื่องอัตโนมัติที่คุณไม่ต้องฝืน</strong>
+        <span data-i18n="turn_c">— ตั้งครั้งเดียว เห็นผลทุกวัน</span>
+      </p>
+    </section>
+
+    <!-- How -->
+    <section class="how" id="how">
+      <header class="section-head reveal">
+        <span class="eyebrow" data-i18n="how_eyebrow">ง่ายกว่าที่คิด</span>
+        <h2 data-i18n="how_h2">เริ่มออมได้ใน 3 นาที</h2>
+      </header>
+      <ol class="steps">
+        <li class="step reveal"><span class="step__num">1</span><h3 data-i18n="step1_h">เชื่อมบัญชี</h3><p data-i18n="step1_p">เชื่อมต่อบัญชีธนาคารอย่างปลอดภัยด้วยการเข้ารหัส ไม่เก็บรหัสของคุณ</p></li>
+        <li class="step reveal"><span class="step__num">2</span><h3 data-i18n="step2_h">ตั้งเป้าหมาย</h3><p data-i18n="step2_p">อยากเก็บเท่าไหร่ ภายในเมื่อไหร่ ระบบคำนวณแผนออมให้อัตโนมัติ</p></li>
+        <li class="step reveal"><span class="step__num">3</span><h3 data-i18n="step3_h">ปล่อยให้ Sprout ทำงาน</h3><p data-i18n="step3_p">ทุกครั้งที่ใช้จ่าย เราปัดเศษเก็บให้ คุณแค่ดูเงินโตขึ้นทุกวัน</p></li>
+      </ol>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+      <header class="section-head reveal">
+        <span class="eyebrow" data-i18n="feat_eyebrow">ทำไมต้อง Sprout</span>
+        <h2 class="pre" data-i18n="feat_h2">ออกแบบมาให้คุณ
+ออมได้จริง โดยไม่ต้องฝืน</h2>
+      </header>
+      <div class="grid">
+        <article class="card reveal">
+          <div class="card__icon"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a6 6 0 0 1 6-6h4a5 5 0 0 1 5 5v1h2v3h-2.2A6 6 0 0 1 13 19H9l-1 2H6l-.5-2.2A6 6 0 0 1 4 15.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="9" cy="11" r="1" fill="currentColor"/></svg></div>
+          <h3 data-i18n="feat1_h">ออมอัตโนมัติ (ปัดเศษ)</h3><p data-i18n="feat1_p">จ่าย ฿52 เราปัดเก็บ ฿8 ให้เอง ออมทีละนิดจนกลายเป็นก้อนโดยไม่รู้สึก</p>
+        </article>
+        <article class="card reveal">
+          <div class="card__icon"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="0.8" fill="currentColor"/></svg></div>
+          <h3 data-i18n="feat2_h">เป้าหมายที่เห็นภาพ</h3><p data-i18n="feat2_p">ตั้งเป้าเป็นภาพ เช่น "เที่ยวญี่ปุ่น" เห็นความคืบหน้าทุกวัน มีแรงออมต่อ</p>
+        </article>
+        <article class="card reveal">
+          <div class="card__icon"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.2 7 9.5 4-1.3 7-5 7-9.5V6l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m9 11.5 2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 data-i18n="feat3_h">ปลอดภัยระดับธนาคาร</h3><p data-i18n="feat3_p">เข้ารหัส 256-bit ยืนยันตัวตน 2 ชั้น เราดูได้แต่ยอด ไม่แตะเงินคุณ</p>
+        </article>
+        <article class="card reveal">
+          <div class="card__icon"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M4 19h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7 15l3-4 3 2 4-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3 data-i18n="feat4_h">รายงานเข้าใจง่าย</h3><p data-i18n="feat4_p">สรุปการใช้จ่ายและการออมเป็นกราฟชัด ๆ รู้ทันทีว่าเงินไปไหน</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Showcase -->
+    <section class="showcase section--ink">
+      <div class="showcase__inner">
+        <div class="showcase__copy reveal">
+          <span class="eyebrow eyebrow--light" data-i18n="showcase_eyebrow">ทุกอย่างในที่เดียว</span>
+          <h2 class="pre" data-i18n="showcase_h2">เห็นภาพการเงินทั้งหมด
+ในแดชบอร์ดเดียว</h2>
+          <ul class="ticks">
+            <li data-i18n="tick1">ยอดออมและการเติบโตแบบเรียลไทม์</li>
+            <li data-i18n="tick2">ติดตามหลายเป้าหมายพร้อมกัน</li>
+            <li data-i18n="tick3">แจ้งเตือนอัจฉริยะเมื่อใช้จ่ายเกินงบ</li>
+          </ul>
+          <a class="btn" href="#buy" data-i18n="showcase_cta">ลองใช้ฟรีวันนี้</a>
+        </div>
+        <div class="showcase__panel reveal" aria-hidden="true">
+          <div class="dash">
+            <div class="dash__row">
+              <div class="dash__kpi"><small data-i18n="dash_k1">ยอดออม</small><b>฿128,540</b><span class="up">▲ 12.4%</span></div>
+              <div class="dash__kpi"><small data-i18n="dash_k2">เดือนนี้</small><b>฿6,280</b><span class="up">▲ 8.1%</span></div>
+            </div>
+            <div class="dash__chart" data-bars>
+              <span data-h="52"></span><span data-h="38"></span><span data-h="70"></span>
+              <span data-h="56"></span><span data-h="84"></span><span data-h="64"></span><span data-h="96"></span>
+            </div>
+            <div class="dash__goals">
+              <div class="dash__goal"><span data-i18n="dash_g1">บ้านหลังแรก</span><div class="ui-progress"><span data-w="45"></span></div></div>
+              <div class="dash__goal"><span data-i18n="dash_g2">กองทุนฉุกเฉิน</span><div class="ui-progress"><span data-w="88"></span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats" aria-label="ตัวเลขที่พิสูจน์แล้ว">
+      <div class="stats__item reveal"><span class="stats__num" data-count="120000">0</span><span class="stats__unit">+</span><p data-i18n="stat1">ผู้ใช้งานทั่วประเทศ</p></div>
+      <div class="stats__item reveal"><span class="stats__prefix">฿</span><span class="stats__num" data-count="2400">0</span><span class="stats__unit" data-i18n="stat2_u">ล้าน</span><p data-i18n="stat2">ยอดออมรวมของผู้ใช้</p></div>
+      <div class="stats__item reveal"><span class="stats__num" data-count="4.9" data-decimals="1">0</span><span class="stats__unit">/5</span><p data-i18n="stat3">คะแนนรีวิวเฉลี่ย</p></div>
+      <div class="stats__item reveal"><span class="stats__num" data-count="3">0</span><span class="stats__unit" data-i18n="stat4_u">นาที</span><p data-i18n="stat4">ใช้เวลาตั้งค่า</p></div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="tst">
+      <header class="section-head reveal">
+        <span class="eyebrow" data-i18n="tst_eyebrow">เสียงจากผู้ใช้จริง</span>
+        <h2 data-i18n="tst_h2">ออมได้จริง ตั้งแต่เดือนแรก</h2>
+      </header>
+      <div class="tst__grid">
+        <figure class="quote reveal"><div class="stars" aria-hidden="true">★★★★★</div><blockquote data-i18n="q1">"ปีนี้เก็บเงินเที่ยวได้เป็นครั้งแรกในชีวิต ทั้งที่ไม่รู้สึกว่าอดอะไรเลย ระบบปัดเศษเก็บให้เก่งมาก"</blockquote><figcaption><span class="av av--1" aria-hidden="true"></span><span><strong data-i18n="q1_n">มายด์</strong><small data-i18n="q1_r">พนักงานออฟฟิศ</small></span></figcaption></figure>
+        <figure class="quote reveal"><div class="stars" aria-hidden="true">★★★★★</div><blockquote data-i18n="q2">"ชอบที่ตั้งเป้าหมายเป็นภาพได้ พอเห็นหลอดวิ่งขึ้นทุกวันมันมีแรงอยากออมต่อจริง ๆ"</blockquote><figcaption><span class="av av--2" aria-hidden="true"></span><span><strong data-i18n="q2_n">เจ</strong><small data-i18n="q2_r">ฟรีแลนซ์</small></span></figcaption></figure>
+        <figure class="quote reveal"><div class="stars" aria-hidden="true">★★★★★</div><blockquote data-i18n="q3">"เรื่องความปลอดภัยทำได้ดี ยืนยัน 2 ชั้น และแอปแตะเงินเราไม่ได้ สบายใจที่จะใช้ต่อ"</blockquote><figcaption><span class="av av--3" aria-hidden="true"></span><span><strong data-i18n="q3_n">ต้น</strong><small data-i18n="q3_r">เจ้าของกิจการ</small></span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+      <header class="section-head reveal">
+        <span class="eyebrow" data-i18n="pricing_eyebrow">ราคาที่ตรงไปตรงมา</span>
+        <h2 data-i18n="pricing_h2">เริ่มฟรี อัปเกรดเมื่อพร้อม</h2>
+        <div class="toggle reveal" role="group" aria-label="รอบการชำระเงิน">
+          <button type="button" class="toggle__btn is-active" data-billing="monthly" aria-pressed="true" data-i18n="bill_month">รายเดือน</button>
+          <button type="button" class="toggle__btn" data-billing="yearly" aria-pressed="false"><span data-i18n="bill_year">รายปี</span> <span class="save" data-i18n="bill_save">ประหยัด 20%</span></button>
+        </div>
+      </header>
+      <div class="plans">
+        <article class="plan reveal">
+          <h3>Free</h3>
+          <p class="plan__desc" data-i18n="plan_free_d">เริ่มต้นสร้างนิสัยการออม</p>
+          <p class="plan__price"><span class="amount" data-monthly="0" data-yearly="0">฿0</span><span class="per" data-i18n="per">/เดือน</span></p>
+          <a class="btn btn--ghost btn--block" href="#buy" data-i18n="plan_free_cta">เริ่มใช้ฟรี</a>
+          <ul class="plan__feats"><li data-i18n="plan_free_f1">ออมอัตโนมัติแบบปัดเศษ</li><li data-i18n="plan_free_f2">1 เป้าหมายการออม</li><li data-i18n="plan_free_f3">รายงานพื้นฐาน</li></ul>
+        </article>
+        <article class="plan plan--featured reveal">
+          <span class="plan__badge" data-i18n="plan_badge">แนะนำ · คุ้มที่สุด</span>
+          <h3>Plus</h3>
+          <p class="plan__desc" data-i18n="plan_plus_d">สำหรับคนที่จริงจังกับเป้าหมาย</p>
+          <p class="plan__price"><span class="amount" data-monthly="99" data-yearly="79">฿99</span><span class="per" data-i18n="per">/เดือน</span></p>
+          <a class="btn btn--block" href="#buy" data-i18n="plan_trial">ทดลองฟรี 14 วัน</a>
+          <ul class="plan__feats"><li><strong data-i18n="plan_plus_f1">ไม่จำกัดเป้าหมายการออม</strong></li><li data-i18n="plan_plus_f2">ออมอัจฉริยะปรับตามรายรับ</li><li data-i18n="plan_plus_f3">รายงานเชิงลึก + แจ้งเตือนงบ</li><li data-i18n="plan_plus_f4">ดอกเบี้ยพิเศษสำหรับเงินออม</li></ul>
+        </article>
+        <article class="plan reveal">
+          <h3>Pro</h3>
+          <p class="plan__desc" data-i18n="plan_pro_d">วางแผนการเงินระดับถัดไป</p>
+          <p class="plan__price"><span class="amount" data-monthly="199" data-yearly="159">฿199</span><span class="per" data-i18n="per">/เดือน</span></p>
+          <a class="btn btn--ghost btn--block" href="#buy" data-i18n="plan_trial">ทดลองฟรี 14 วัน</a>
+          <ul class="plan__feats"><li data-i18n="plan_pro_f1">ทุกอย่างใน Plus</li><li data-i18n="plan_pro_f2">แผนการลงทุนอัตโนมัติ</li><li data-i18n="plan_pro_f3">ที่ปรึกษาการเงินส่วนตัว</li><li data-i18n="plan_pro_f4">สรุปภาษีสิ้นปี</li></ul>
+        </article>
+      </div>
+      <p class="pricing__guarantee reveal">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.2 7 9.5 4-1.3 7-5 7-9.5V6l-7-3Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="m9 11.5 2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-i18n="guarantee">การันตีคืนเงินภายใน 30 วัน · ยกเลิกได้ทุกเมื่อ ไม่มีข้อผูกมัด</span>
+      </p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+      <header class="section-head reveal">
+        <span class="eyebrow" data-i18n="faq_eyebrow">ยังลังเลอยู่ใช่ไหม</span>
+        <h2 data-i18n="faq_h2">คำถามที่พบบ่อย</h2>
+      </header>
+      <div class="faq__list reveal" data-faq>
+        <details class="faq__item"><summary><span data-i18n="faq1_q">ข้อมูลและเงินของฉันปลอดภัยแค่ไหน?</span><span class="faq__ic" aria-hidden="true"></span></summary><div class="faq__ans"><p data-i18n="faq1_a">Sprout เข้ารหัสข้อมูลแบบ 256-bit ยืนยันตัวตน 2 ชั้น และเชื่อมบัญชีแบบอ่านอย่างเดียว เราไม่สามารถโอนหรือถอนเงินของคุณได้ เงินยังอยู่ในบัญชีธนาคารของคุณเสมอ</p></div></details>
+        <details class="faq__item"><summary><span data-i18n="faq2_q">มีค่าธรรมเนียมแอบแฝงไหม?</span><span class="faq__ic" aria-hidden="true"></span></summary><div class="faq__ans"><p data-i18n="faq2_a">ไม่มี แพ็กเกจ Free ใช้ฟรีตลอด ส่วนแพ็กเกจแบบชำระเงินจะแสดงราคาชัดเจน ไม่มีค่าธรรมเนียมซ่อน และยกเลิกได้ทุกเมื่อ</p></div></details>
+        <details class="faq__item"><summary><span data-i18n="faq3_q">รองรับธนาคารไหนบ้าง?</span><span class="faq__ic" aria-hidden="true"></span></summary><div class="faq__ans"><p data-i18n="faq3_a">รองรับธนาคารหลักในไทยครบทุกแห่ง และเพิ่มเติมอย่างต่อเนื่อง หากธนาคารของคุณยังไม่รองรับ สามารถแจ้งทีมงานเพื่อขอเพิ่มได้</p></div></details>
+        <details class="faq__item"><summary><span data-i18n="faq4_q">ถ้าอยากยกเลิกต้องทำยังไง?</span><span class="faq__ic" aria-hidden="true"></span></summary><div class="faq__ans"><p data-i18n="faq4_a">ยกเลิกได้เองในแอปภายใน 2 คลิก ไม่มีข้อผูกมัด และถ้าอยู่ใน 30 วันแรกของแพ็กเกจชำระเงิน เรายินดีคืนเงินเต็มจำนวน</p></div></details>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta section--ink" id="buy">
+      <div class="cta__inner reveal">
+        <h2 class="pre" data-i18n="cta_h2">เริ่มออมวันนี้
+ตัวคุณในอนาคตจะขอบคุณ</h2>
+        <p data-i18n="cta_p">ตั้งค่าใน 3 นาที · เริ่มฟรี ไม่ต้องผูกบัตร · ยกเลิกได้ทุกเมื่อ</p>
+        <div class="cta__actions">
+          <a class="btn btn--lg" href="#top" data-i18n="cta_b1">สร้างบัญชีฟรี</a>
+          <a class="btn btn--ghost btn--lg" href="#pricing" data-i18n="cta_b2">ดูแพ็กเกจ</a>
+        </div>
+        <p class="cta__micro" data-i18n="cta_micro">เข้าร่วมกับผู้ใช้กว่า 120,000 คนที่ออมเงินได้จริงกับ Sprout</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <div class="brand">
+          <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c0-5-3-7-7-7 0 5 3 7 7 7Z" fill="#34d399"/><path d="M12 21c0-6 3.5-8.5 8-8.5 0 6-3.5 8.5-8 8.5Z" fill="#10b981"/><path d="M12 21v-8" stroke="#065f46" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span>Sprout</span>
+        </div>
+        <p data-i18n="footer_tag">ออมเงินอัตโนมัติ ให้เงินโตเอง</p>
+      </div>
+      <nav class="footer__cols" aria-label="ลิงก์ท้ายเว็บ">
+        <div><h4 data-i18n="footer_c1">ผลิตภัณฑ์</h4><a href="#features" data-i18n="nav_features">ฟีเจอร์</a><a href="#pricing" data-i18n="nav_pricing">ราคา</a><a href="#how" data-i18n="nav_how">วิธีทำงาน</a></div>
+        <div><h4 data-i18n="footer_c2">บริษัท</h4><a href="#top" data-i18n="footer_about">เกี่ยวกับเรา</a><a href="#top" data-i18n="footer_career">ร่วมงานกับเรา</a><a href="#faq" data-i18n="footer_help">ช่วยเหลือ</a></div>
+        <div><h4 data-i18n="footer_c3">กฎหมาย</h4><a href="#top" data-i18n="footer_privacy">ความเป็นส่วนตัว</a><a href="#top" data-i18n="footer_terms">เงื่อนไขการใช้</a><a href="#top">PDPA</a></div>
+      </nav>
+    </div>
+    <div class="footer__bar">
+      <p data-i18n="footer_note">เว็บไซต์นี้เป็นงานสาธิต (demo) — ชื่อแบรนด์ ราคา และข้อมูลเป็นตัวอย่างสมมติ</p>
+      <p>© <span data-year>2026</span> Sprout Demo · <span data-i18n="footer_built">Built by ธีร์</span></p>
+    </div>
+  </footer>
+</body>
+</html>
